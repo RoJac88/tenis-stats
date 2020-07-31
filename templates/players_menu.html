@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Tenistas - {% endblock %}
+{% block main %}
+<div class="top-overline">top 10 tenistas por nº de vitórias</div>
+<div style="padding-bottom: 16px; border-bottom: 1px solid grey">
+{% include '_players_wins_table.html' %}
+</div>
+{% include '_nations.html' %}
+<div class="center-content">
+  <a href="{{url_for('dump_players')}}"><button class="all">Listar Todos</button></a>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="top-bar">
+  <div class="login"><a href="{{url_for('login')}}">Entrar</a></div>
+</div>
+<div class="nav-container">
+  <div class="title">Tênis Stats</div>
+  <div class="subtitle">Estatísticas de partidas do circuito profissional da ATP</div>
+  <nav>
+    {% if active == 'home' %} <div class="nav-item active">Home</div> {% else %}<a href="{{url_for('home')}}"><div class="nav-item">Home</div></a>{% endif %}</a>
+    <div class="nav-item nav-nested"><span>Tenistas</span>
+      <div class="nav-subitems-container hidden">
+        <a href="{{url_for('new_player')}}"><div class="nav-item subitem">Criar</div></a>
+        <a href="{{url_for('dump_players')}}"><div class="nav-item subitem">Listar</div></a>
+        <a href="{{url_for('player_menu')}}"><div class="nav-item subitem">Menu</div></a>
+      </div>
+    </div>
+    <div class="nav-item nav-nested"><span>Torneios</span>
+      <div class="nav-subitems-container hidden">
+        <a href="{{url_for('new_tournament')}}"><div class="nav-item subitem">Criar</div></a>
+        <a href="{{url_for('dump_tournaments')}}"><div class="nav-item subitem">Listar</div></a>
+        <a href="{{url_for('view_tournaments')}}"><div class="nav-item subitem">Menu</div></a>
+      </div>
+    </div>
+    <div class="nav-item nav-nested"><span>Partidas</span>
+      <div class="nav-subitems-container hidden">
+        <a href="{{url_for('new_match')}}"><div class="nav-item subitem">Criar</div></a>
+        <a href="{{url_for('admin_view_matches')}}"><div class="nav-item subitem">Listar</div></a>
+      </div>
+    </div>
+    {% if active == 'rankings' %}<div class="nav-item active">Rankings</div>{% else %}<a href="{{url_for('ranking_menu')}}"> <div class="nav-item">Rankings</div></a> {% endif %}
+    {% if active == 'about' %}<div class="nav-item active">Sobre</div>{% else %}<a href="{{url_for('about')}}"> <div class="nav-item">Sobre</div></a> {% endif %}
+  </nav>
+</div>

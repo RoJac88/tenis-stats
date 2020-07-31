@@ -1,0 +1,13 @@
+<div class="pager">
+  {% if previous %}
+  <a href="{{previous}}"><div class="previous"></div></a>
+  {% else %}
+  <div class="previous" style="visibility: hidden;"></div>
+  {% endif %}
+  <div class="page">Página {{page}}</div>
+  {% if next %}
+  <a href="{{next}}"><div class="next"></div></a>
+  {% else %}
+  <div class="next" style="visibility: hidden;"></div>
+  {% endif %}
+</div>

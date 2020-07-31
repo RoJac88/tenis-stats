@@ -1,0 +1,46 @@
+<table class='match-list'>
+  <thead>
+    <tr>
+      <td>ATP</td>
+      <td>TORNEIO</td>
+      <td>ANO</td>
+      <td>FASE</td>
+      <td>Nº</td>
+      <td>VENCEDOR</td>
+      <td>VENCIDO</td>
+      <td>PISO</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for match in matches %}
+    <tr>
+      <td>{{match.atp_level}}</td>
+      <td><a href="{{url_for('view_tournament', t_code=match.t_year|string +'-'+ match.t_id)}}">{{match.t_name}}</a></td>
+      <td>{{match.t_year}}</td>
+      <td><a href="{{url_for('view_match', player_id=0, m_code=match.match_number|string +'-'+ match.t_id +'-'+ match.t_year|string)}}">{{match.t_round}}</a></td>
+      <td><a href="{{url_for('view_match', player_id=0, m_code=match.match_number|string +'-'+ match.t_id +'-'+ match.t_year|string)}}">{{match.match_number}}</a></td>
+      <td class="winner">
+        {% if match.w_id %}
+        <img class="flag" src="{{url_for('static', filename='/flags/' + match.w_fed|lower + '.gif')}}" alt="{{match.w_fed}}" title="{{match.w_fed}}"/> <a href="{{url_for('view_player', player_id=match.w_id)}}">{{match.winner_fname}} {{match.winner_lname}}</a>
+        {% endif %}
+      </td>
+      <td class="loser">
+        {% if match.l_id %}
+        <img class="flag" src="{{url_for('static', filename='/flags/' + match.l_fed|lower + '.gif')}}" alt="{{match.l_fed}}" title="{{match.l_fed}}"/> <a href="{{url_for('view_player', player_id=match.l_id)}}">{{match.loser_fname}} {{match.loser_lname}}</a>
+        {% endif %}
+      </td>
+      {% if match.surface == 'H' %}
+      <td><span class="icon h"></span> Duro</td>
+      {% elif match.surface == 'C' %}
+      <td><span class="icon c"></span>Saibro</td>
+      {% elif match.surface == 'G'%}
+      <td><span class="icon g"></span>Grama</td>
+      {% elif match.surface == 'P'%}
+      <td><span class="icon p"></span>Carpete</td>
+      {% else %}
+      <td> ? </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

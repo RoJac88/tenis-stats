@@ -1,0 +1,15 @@
+<div class="top-overline">torneios por categoria</div>
+<div class="tournament-types">
+  <div class="t-type">
+    <a href="{{url_for('view_tournaments', cat='G')}}"><img src="{{url_for('static', filename='slams.jpg')}}" /></a>
+    <a href="{{url_for('view_tournaments', cat='G')}}"><div class="caption">Grand Slams</div></a>
+  </div>
+  <div class="t-type">
+    <a href="{{url_for('view_tournaments', cat='A')}}"><img src="{{url_for('static', filename='masters.png')}}" /></a>
+    <a href="{{url_for('view_tournaments', cat='A')}}"><div class="caption">ATP World Tour</div></a>
+  </div>
+  <div class="t-type">
+    <a href="{{url_for('view_tournaments', cat='D')}}"><img src="{{url_for('static', filename='davis.png')}}" /></a>
+    <a href="{{url_for('view_tournaments', cat='D')}}"><div class="caption">Davis Cup</div></a>
+  </div>
+</div>

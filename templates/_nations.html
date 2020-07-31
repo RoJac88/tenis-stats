@@ -1,0 +1,11 @@
+<div class="overline">tenistas por federação</div>
+<div class="flags-container">
+  {% for fed in feds %}
+  <a href="{{url_for('dump_players', fed=fed)}}">
+    <div class="nation">
+      <img class="flag" src="{{url_for('static', filename='/flags/' + fed|lower + '.gif')}}" alt="{{fed}}" title="{{fed}}"/>
+      <span style="color: inherit;">{{fed}}</span>
+    </div>
+  </a>
+  {% endfor %}
+</div>

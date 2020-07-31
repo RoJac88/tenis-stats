@@ -1,0 +1,82 @@
+<form class="new-player-container" action="" method="POST">
+  <div class="form-pic row-4">
+    <div class="overline">preview da foto</div>
+    <img class="picture" width=220 height=200
+      {% if player and player['img'] %} src="{{player['img']}}" {% else %} src="{{url_for('static', filename='/players/default.png')}}" {% endif %}/>
+  </div>
+  <div class="field fed">
+    <label class="field-overline" for="fed">Federação</label>
+    <input class="field-content" type="text" name="fed" id="fed" placeholder="FED" maxlength="3"
+      {% if player and player['country'] %} value="{{player['country']}}" {% endif %}>
+    {% if errors['fed'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['fed']}}</div>
+    {% endif %}
+  </div>
+  <div class="field first-name">
+    <label class="field-overline" for="firstname">Nome</label>
+    <input class="field-content" type="text" name="firstname" id="firstname" placeholder="Nome"
+      {% if player and player['first_name'] %} value="{{player['first_name']}}" {% endif %}>
+    {% if errors['first_name'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['first_name']}}</div>
+    {% endif %}
+  </div>
+  <div class="field last-name">
+    <label class="field-overline" for="lastname">Sobrenome</label>
+    <input class="field-content" type="text" name="lastname" id="lastname" placeholder="Sobrenome"
+      {% if player and player['last_name'] %} value="{{player['last_name']}}" {% endif %}>
+    {% if errors['last_name'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['last_name']}}</div>
+    {% endif %}
+  </div>
+  <div class="field height">
+    <label class="field-overline" for="height">Altura</label>
+    <input class="field-content" type="number" name="height" id="height" placeholder="cm" min="0" max="300"
+      {% if player and player['height'] %} value="{{player['height']}}" {% endif %}>
+    {% if errors['height'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['height']}}</div>
+    {% endif %}
+  </div>
+  <div class="field bdate">
+    <label class="field-overline" for="bdate">Nascimento</label>
+    <input class="field-content" type="date" name="bdate" id="bdate"
+      {% if player and player['birthdate'] %} value="{{player['birthdate']}}" {% endif %}>
+    {% if errors['bdate'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['bdate']}}</div>
+    {% endif %}
+  </div>
+  <div class="field hand">
+    <label class="field-overline" for="hand">Empunhadura</label>
+    <select class="field-content" name="hand" id="hand">
+      <option value="U">?</option>
+      <option value="R" {% if player and player['hand'] and player['hand']=='R' %} selected {% endif %}
+      >Destro</option>
+      <option value="L"{% if player and player['hand'] and player['hand']=='L' %} selected {% endif %}
+      >Canhoto</option>
+      <option value="A"{% if player and player['hand'] and player['hand']=='A' %} selected {% endif %}
+      >Ambidestro</option>
+    </select>
+  </div>
+  <div class="field id">
+    <label class="field-overline" for="id">id</label>
+    <input class="field-content" type="number" name="id" id="id" placeholder="100000"
+      {% if player and player['id'] %} value="{{player['id']}}" {% endif %}>
+    {% if errors['id'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['id']}}</div>
+    {% endif %}
+  </div>
+  <div class="field url">
+    <label class="field-overline" for="img">URL da Foto</label>
+    <input class="field-content" type="text" name="img" id="img" placeholder="www.url.com.br/foto.jpg"
+      {% if player and player['img'] %} value="{{player['img']}}"{% endif %}>
+  </div>
+  <div class="actions">
+    {% if player %}
+    <a href="{{url_for('delete_player', player_id=player['id'])}}"><button type="button" class="bg-delete"><i class="fa fa-trash"></i> Apagar</button></a>
+    <a href="{{url_for('view_player', player_id=player['id'])}}"><button type="button" class="bg-none"><i class="fa fa-times-circle"></i> Cancelar</button></a>
+    <button type="submit" class="bg-blue"><i class="fa fa-save"></i> Atualizar</button>
+    {% else %}
+    <button type="button" class="bg-none eraser"><i class="fa fa-eraser"></i> Limpar</button>
+    <button type="submit" class="bg-blue"><i class="fa fa-plus-circle"></i> Inserir</button>
+    {% endif %}
+  </div>
+</form>

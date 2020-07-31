@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Tenistas - {% endblock %}
+{% block main %}
+{% include '_player_searchbar.html' %}
+<table class='player-list'>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>NOME</td>
+      <td>NASCIMENTO</td>
+      <td>FED</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for player in players %}
+    <tr>
+      <td><a href="{{url_for('view_player', player_id=player.id)}}">{{player.id}}</a></td>
+      <td><a href="{{url_for('view_player', player_id=player.id)}}">{{player.first_name}} {{player.last_name}}</a></td>
+      <td>{{player.birthdate}}</td>
+      <td><img class="flag" src="{{url_for('static', filename='/flags/' + player.country|lower + '.gif')}}" alt="{{player.country}}" title="{{player.country}}"></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include '_pager.html' %}
+{% endblock %}

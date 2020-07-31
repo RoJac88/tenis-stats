@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{match.t_name}}, Partida {{match.match_number}} - {% endblock %}
+{% block main %}
+<article class="match">
+  <div class="admin-actions">
+    <a href="{{url_for('edit_match', m_code=match.match_number|string +'-'+ match.t_id|string +'-'+ match.t_year|string)}}"><button class="edit"><i class="fa fa-pencil"></i>Editar</button></a>
+    <a href="{{url_for('delete_match', m_code=match.match_number|string +'-'+ match.t_id|string +'-'+ match.t_year|string)}}"><button class="delete"><i class="fa fa-trash"></i>Apagar</button></a>
+  </div>
+  <header class="title"><a href="{{url_for('view_tournament', t_code=match.t_year|string +'-'+ match.t_id)}}">{{match.t_name}} {{match.t_year}}</a> ({{match.t_round}}) - Partida nº {{match.match_number}}</header>
+  {% if match.surface == 'H' %}
+  <div class="match-surface"><span class="icon h"></span> Duro</div>
+  {% elif match.surface == 'C' %}
+  <div class="match-surface"><span class="icon c"></span>Saibro</div>
+  {% elif match.surface == 'G'%}
+  <div class="match-surface"><span class="icon g"></span>Grama</div>
+  {% elif match.surface == 'P'%}
+  <div class="match-surface"><span class="icon p"></span>Carpete</div>
+  {% endif %}
+  <div class="scoreboard">
+    <div class="player-score win">
+      <div class="player">
+        {% if match.w_id %}
+        <img class="flag" src="{{url_for('static', filename='/flags/' + match.w_fed|lower + '.gif')}}" alt="{{match.w_fed}}" title="{{match.w_fed}}"><a href="{{url_for('view_player', player_id=match.w_id)}}">{{match.winner_fname}} {{match.winner_lname}}</a>
+        {% endif %}
+      </div>
+      {% for score in match.split_score %}
+      <div class="set-score">{{score[0][:1]}} {{score[0][1:]}}</div>
+      {% endfor %}
+    </div>
+    <div class="player-score lose">
+      <div class="player">
+        {% if match.l_id %}
+        <img class="flag" src="{{url_for('static', filename='/flags/' + match.l_fed|lower + '.gif')}}" alt="{{match.l_fed}}" title="{{match.l_fed}}"><a href="{{url_for('view_player', player_id=match.l_id)}}">{{match.loser_fname}} {{match.loser_lname}}</a>
+        {% endif %}
+      </div>
+      {% for score in match.split_score %}
+      <div class="set-score">{{score[1][:1]}} {{score[1][1:]}}</div>
+      {% endfor %}
+    </div>
+  </div>
+</article>
+{% include '_match_stats.html' %}
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Torneios - {% endblock %}
+{% block main %}
+<div class="t-admin-container">
+  <div class="t-admin-actions">
+    <a href="{{url_for('edit_tournament', t_code=tournament.tournament_year|string+'-'+tournament.tournament_id|string)}}"><button class="edit"><i class="fa fa-pencil"></i>Editar</button></a>
+    <a href="{{url_for('delete_tournament', t_code=tournament.tournament_year|string+'-'+tournament.tournament_id|string)}}"><button class="delete"><i class="fa fa-trash"></i>Apagar</button></a>
+  </div>
+</div>
+<div class="title">{{tournament.t_name}} {{tournament.tournament_year}}</div>
+<div class="t-info">
+  <div class="field">
+    <div class="field-overline">id</div>
+    <div class="field-content atp-id">{{tournament.tournament_id}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">vencedor</div>
+    <div class="field-content atp-id" style="color: gold;">
+      {% if tournament.w_id %}
+      <img class="flag" src="{{url_for('static', filename='/flags/' + tournament.w_fed|lower + '.gif')}}" alt="{{tournament.w_fed}}" title="{{tournament.w_fed}}"><a href="{{url_for('view_player', player_id=tournament.w_id)}}">{{tournament.w_fname}} {{tournament.w_lname}}</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <div class="field-overline">piso</div>
+    {% if tournament.surface == 'H' %}
+    <div class="field-content atp-id"><span class="icon h"></span> Duro</div>
+    {% elif tournament.surface == 'C' %}
+    <div class="field-content atp-id"><span class="icon c"></span>Saibro</div>
+    {% elif tournament.surface == 'G'%}
+    <div class="field-content atp-id"><span class="icon g"></span>Grama</div>
+    {% elif tournament.surface == 'P'%}
+    <div class="field-content atp-id"><span class="icon p"></span>Carpete</div>
+    {% else %}
+    <div class="field-content atp-id"> ? </div>
+    {% endif %}
+  </div>
+  <div class="field">
+    <div class="field-overline">categoria</div>
+    <div class="field-content atp-id">{{tournament.atp_level}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">2º colocado</div>
+    <div class="field-content atp-id">
+      {% if tournament.r_id %}
+      <img class="flag" src="{{url_for('static', filename='/flags/' + tournament.r_fed|lower + '.gif')}}" alt="{{tournament.r_fed}}" title="{{tournament.r_fed}}"><a href="{{url_for('view_player', player_id=tournament.r_id)}}">{{tournament.r_fname}} {{tournament.r_lname}}</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="field">
+    <div class="field-overline">data</div>
+    <div class="field-content atp-id">{{tournament.t_date}}</div>
+  </div>
+</div>
+{% if matches %}
+<div class="overline">partidas</div>
+<div class="show-brackets"></div>
+{% include '_matches_table.html' %}
+{% endif %}
+{% endblock %}

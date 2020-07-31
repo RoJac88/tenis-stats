@@ -1,0 +1,21 @@
+{% if tabs %}
+{% if atp_level %}
+<div class="top-overline">{{atp_level|atp_level}}</div>
+{% else %}
+<div class="top-overline">{{active_tab}}</div>
+{% endif %}
+<div class="tab-container">
+  {% if active_tab == 'Todos' %}
+  <div class="tab active">Todos</div>
+  {% else %}
+  <div class="tab"><a href="{{url_for('view_tournaments', cat=atp_level)}}">Todos</a></div>
+  {% endif %}
+  {% for tab in tabs %}
+  {% if active_tab == tab %}
+  <div class="tab active">{{tab}}</div>
+  {% else %}
+  <div class="tab"><a href="{{url_for('view_tournaments', cat=atp_level, nome=tab)}}">{{tab}}</a></div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endif %}

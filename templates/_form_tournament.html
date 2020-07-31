@@ -1,0 +1,68 @@
+<form class="new-t-container" action="" method="POST">
+  <div class="field t-id">
+    <label class="field-overline" for="t-id">id</label>
+    <input class="field-content" type="text" name="t-id" id="t-id" placeholder="0001"
+      {% if t and t['tournament_id'] %} value="{{t['tournament_id']}}" {% endif %}>
+    {% if errors['t-id'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-id']}}</div>
+    {% endif %}
+  </div>
+  <div class="field t-name">
+    <label class="field-overline" for="t-name">Nome</label>
+    <input class="field-content" type="text" name="t-name" id="t-name" placeholder="Wimbledon"
+      {% if t and t['t_name'] %} value="{{t['t_name']}}" {% endif %}>
+    {% if errors['t-name'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-name']}}</div>
+    {% endif %}
+  </div>
+  <div class="field t-year">
+    <label class="field-overline" for="t-year">Ano</label>
+    <input class="field-content" type="number" name="t-year" id="t-year" placeholder="1913" maxlength="4" min="1910"
+      {% if t and t['tournament_year'] %} value="{{t['tournament_year']}}" {% endif %}>
+    {% if errors['t-year'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-year']}}</div>
+    {% endif %}
+  </div>
+  <div class="field cat">
+    <label class="field-overline" for="cat">categoria</label>
+    <select class="field-content" name="cat" id="cat">
+      <option value="A">ATP Tour</option>
+      <option value="G" {% if t and t['atp_level'] and t['atp_level']=='G' %} selected {% endif %}
+      >Grand Slam</option>
+      <option value="D"{% if t and t['atp_level'] and t['atp_level']=='D' %} selected {% endif %}
+      >Davis Cup</option>
+    </select>
+  </div>
+  <div class="field t-date">
+    <label class="field-overline" for="t-date">Data</label>
+    <input class="field-content" type="date" name="t-date" id="t-date"
+      {% if t and t['t_date'] %} value="{{t['t_date']}}" {% endif %}>
+    {% if errors['t-date'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-date']}}</div>
+    {% endif %}
+  </div>
+  <div class="field surface">
+    <label class="field-overline" for="surface">piso</label>
+    <select class="field-content" name="surface" id="surface">
+      <option value="U">?</option>
+      <option value="H"{% if t and t['surface'] and t['surface']=='H' %} selected {% endif %}
+      >Duro</option>
+      <option value="G" {% if t and t['surface'] and t['surface']=='G' %} selected {% endif %}
+      >Grama</option>
+      <option value="C"{% if t and t['surface'] and t['surface']=='C' %} selected {% endif %}
+      >Saibro</option>
+      <option value="P"{% if t and t['surface'] and t['surface']=='P' %} selected {% endif %}
+      >Carpete</option>
+    </select>
+  </div>
+  <div class="actions">
+    {% if t %}
+    <a href="{{url_for('delete_tournament', t_code=t['tournament_year']|string+'-'+t['tournament_id']|string)}}"><button type="button" class="bg-delete"><i class="fa fa-trash"></i> Apagar</button></a>
+    <a href="{{url_for('view_tournament', t_code=t['tournament_year']|string+'-'+t['tournament_id']|string)}}"><button type="button" class="bg-none"><i class="fa fa-times-circle"></i> Cancelar</button></a>
+    <button type="submit" class="bg-blue"><i class="fa fa-save"></i> Atualizar</button>
+    {% else %}
+    <button type="button" class="bg-none eraser"><i class="fa fa-eraser"></i> Limpar</button>
+    <button type="submit" class="bg-blue"><i class="fa fa-plus-circle"></i> Inserir</button>
+    {% endif %}
+  </div>
+</form>

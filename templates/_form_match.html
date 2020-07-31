@@ -1,0 +1,269 @@
+<form class="new-match-container" action="" method="POST">
+  <div class="field t-id">
+    <label class="field-overline" for="t-id">id torneio</label>
+    <input class="field-content" type="text" name="t-id" id="t-id"
+      {% if (match and match['t_id']) %} value="{{match['t_id']}}" {% endif %}
+      {% if t_id %} value="{{t_id}}" {% endif %}
+    ></input>
+    {% if errors and errors['t-id'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-id']}}</div>
+    {% endif %}
+  </div>
+  <div class="field t-year">
+    <label class="field-overline" for="t-year">ano do torneio</label>
+    <input class="field-content" type="number" name="t-year" id="t-year"
+      {% if (match and match['t_year']) %} value="{{match['t_year']}}" {% endif %}
+      {% if t_year %} value="{{t_year}}" {% endif %}
+    ></input>
+    {% if errors and errors['t-year'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-year']}}</div>
+    {% endif %}
+  </div>
+  <div class="field t-name">
+    <div class="field-overline">Nome do torneio</div>
+    <div class="field-content" id="t-name">
+      {% if match and match['t_name'] %} {{match['t_name']}} {% endif %}
+      {% if t_name %} {{t_name}} {% endif %}
+    </div>
+    <div class="t-names">
+      {% if t_names %}
+      {% for t in t_names %}
+      <span id={{"tid-" + t['tournament_id']|string}}>{{t['t_name']}}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="field match-number">
+    {% if match %}
+    <label class="field-overline" for="match-number">id padrtida</label>
+    <input class="field-content" type="number" name="match-number" id="match-number"
+      {% if match['match_number'] %} value="{{match['match_number']}}" {% endif %}></input>
+    {% endif %}
+    {% if errors and errors['match-number'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['match-number']}}</div>
+    {% endif %}
+  </div>
+  <div class="field t-round">
+    <label class="field-overline" for="t-round">rodada</label>
+    <select class="field-content" name="t-round" id="t-round">
+      <option value="RR">RR</option>
+      <option value="R128"
+        {% if match and match['t_round'] and match['t_round'] == 'R128' %} selected {% endif %}
+      >R 128</option>
+      <option value="R64"
+        {% if match and match['t_round'] and match['t_round'] == 'R64' %} selected {% endif %}
+      >R 64</option>
+      <option value="R32"
+        {% if match and match['t_round'] and match['t_round'] == 'R32' %} selected {% endif %}
+      >R 32</option>
+      <option value="R16"
+        {% if match and match['t_round'] and match['t_round'] == 'R16' %} selected {% endif %}
+      >R 16</option>
+      <option value="QF"
+        {% if match and match['t_round'] and match['t_round'] == 'QF' %} selected {% endif %}
+      >QF</option>
+      <option value="SF"
+        {% if match and match['t_round'] and match['t_round'] == 'SF' %} selected {% endif %}
+      >SF</option>
+      <option value="F"
+        {% if match and match['t_round'] and match['t_round'] == 'F' %} selected {% endif %}
+      >F</option>
+    </select>
+    {% if errors and errors['t-round'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-round']}}</div>
+    {% endif %}
+  </div>
+  <div class="field score">
+    <label class="field-overline" for="score">placar</label>
+    <input class="field-content" typssssssse="text" name="score" id="score"
+      {% if match and match['score'] %} value="{{match['score']}}" {% endif %}
+    ></input>
+    {% if errors and errors['score'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['score']}}</div>
+    {% endif %}
+  </div>
+  <div class="field bestof">
+    <label class="field-overline" for="bestof">melhor de</label>
+    <select class="field-content" name="bestof" id="bestof">
+      <option value="3"
+        {% if match and match['best_of'] and match['best_of'] == 3 %} selected {% endif %}
+      >3 sets</option>
+      <option value="5"
+        {% if match and match['best_of'] and match['best_of'] == 5 %} selected {% endif %}
+      >5 sets</option>
+    </select>
+    {% if errors and errors['t-bestof'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['t-bestof']}}</div>
+    {% endif %}
+  </div>
+  <div class="field winner-id">
+    <label class="field-overline" for="winner-id">id vencedor</label>
+    <input class="field-content" type="number" name="winner-id" id="winner-id"
+      {% if match and match['winner_id'] %} value="{{match['winner_id']}}" {% endif %}
+    ></input>
+    {% if errors and errors['winner-id'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['winner-id']}}</div>
+    {% endif %}
+  </div>
+  <div class="player-searchbar search-winner">
+    <span class="status"><i class="fa fa-search"></i></span>
+    <input type="text" placeholder="Buscar">
+    <div class="search-content">
+    </div>
+  </div>
+  <div class="field winner-name">
+    <div class="field-overline">Nome do vencedor</div>
+    <div class="field-content smaller" id="w-name">
+      {% if match and match['winner_fname'] and match['winner_lname'] %}
+      {{match['winner_fname']}} {{match['winner_lname']}}
+      {% endif %}
+    </div>
+  </div>
+  <div class="field loser-id">
+    <label class="field-overline" for="loser-id">id perdedor</label>
+    <input class="field-content" type="number" name="loser-id" id="loser-id"
+      {% if match and match['loser_id'] %} value="{{match['loser_id']}}" {% endif %}
+    ></input>
+    {% if errors and errors['loser-id'] %}
+    <div class="error"><i class="fa fa-exclamation-circle"></i>{{errors['loser-id']}}</div>
+    {% endif %}
+  </div>
+  <div class="player-searchbar search-loser">
+    <span class="status"><i class="fa fa-search"></i></span>
+    <input type="text" placeholder="Buscar">
+    <div class="search-content">
+    </div>
+  </div>
+  <div class="field loser-name">
+    <div class="field-overline">Nome do perdedor</div>
+    <div class="field-content smaller" id="l-name">
+      {% if match and match['loser_fname'] and match['loser_lname'] %}
+      {{match['loser_fname']}} {{match['loser_lname']}}
+      {% endif %}
+    </div>
+  </div>
+  <div class="stats winner">
+    <div class="overline">stats vencedor</div>
+    <div class="field">
+      <label class="field-overline" for="w-ace">aces</label>
+      <input class="field-content" type="number" name="w-ace" id="w-ace" min="0"
+        {% if match and match['w_ace'] %} value="{{match['w_ace']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-df">duplas faltas</label>
+      <input class="field-content" type="number" name="w-df" id="w-df" min="0"
+        {% if match and match['w_df'] %} value="{{match['w_df']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-svpt">svpt</label>
+      <input class="field-content" type="number" name="w-svpt" id="w-svpt" min="0"
+        {% if match and match['w_svpt'] %} value="{{match['w_svpt']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-1stin">w_1stIn</label>
+      <input class="field-content" type="number" name="w-1stin" id="w-1stin" min="0"
+        {% if match and match['w_1stIn'] %} value="{{match['w_1stIn']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-1stwon">w_1stWon</label>
+      <input class="field-content" type="number" name="w-1stwon" id="w-1stwon" min="0"
+        {% if match and match['w_1stWon'] %} value="{{match['w_1stWon']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-2ndwon">w_2ndWon</label>
+      <input class="field-content" type="number" name="w-2ndwon" id="w-2ndwon" min="0"
+        {% if match and match['w_2ndWon'] %} value="{{match['w_2ndWon']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-svgms">w_SvGms</label>
+      <input class="field-content" type="number" name="w-svgms" id="w-svgms" min="0"
+        {% if match and match['w_SvGms'] %} value="{{match['w_SvGms']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-bpsaved">w_bpSaved</label>
+      <input class="field-content" type="number" name="w-bpsaved" id="w-bpsaved" min="0"
+        {% if match and match['w_bpSaved'] %} value="{{match['w_bpSaved']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="w-bpfaced">w_bpFaced</label>
+      <input class="field-content" type="number" name="w-bpfaced" id="w-bpfaced" min="0"
+        {% if match and match['w_bpFaced'] %} value="{{match['w_bpFaced']}}" {% endif %}
+      ></input>
+    </div>
+  </div>
+  <div class="stats loser">
+    <div class="overline">stats perdedor</div>
+    <div class="field">
+      <label class="field-overline" for="l-ace">aces</label>
+      <input class="field-content" type="number" name="l-ace" id="l-ace" min="0"
+        {% if match and match['l_ace'] %} value="{{match['l_ace']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-df">duplas faltas</label>
+      <input class="field-content" type="number" name="l-df" id="l-df" min="0"
+        {% if match and match['l_df'] %} value="{{match['l_df']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-svpt">svpt</label>
+      <input class="field-content" type="number" name="l-svpt" id="l-svpt" min="0"
+        {% if match and match['l_svpt'] %} value="{{match['l_svpt']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-1stin">l_1stIn</label>
+      <input class="field-content" type="number" name="l-1stin" id="l-1stin" min="0"
+        {% if match and match['l_1stIn'] %} value="{{match['l_1stIn']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-1stwon">l_1stWon</label>
+      <input class="field-content" type="number" name="l-1stwon" id="l-1stwon" min="0"
+        {% if match and match['l_1stWon'] %} value="{{match['l_1stWon']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-2ndwon">l_2ndWon</label>
+      <input class="field-content" type="number" name="l-2ndwon" id="l-2ndwon" min="0"
+        {% if match and match['l_2ndWon'] %} value="{{match['l_2ndWon']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-svgms">l_SvGms</label>
+      <input class="field-content" type="number" name="l-svgms" id="l-svgms" min="0"
+        {% if match and match['l_SvGms'] %} value="{{match['l_SvGms']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-bpsaved">l_bpSaved</label>
+      <input class="field-content" type="number" name="l-bpsaved" id="l-bpsaved" min="0"
+        {% if match and match['l_bpSaved'] %} value="{{match['l_bpSaved']}}" {% endif %}
+      ></input>
+    </div>
+    <div class="field">
+      <label class="field-overline" for="l-bpfaced">l_bpFaced</label>
+      <input class="field-content" type="number" name="l-bpfaced" id="l-bpfaced" min="0"
+        {% if match and match['l_bpFaced'] %} value="{{match['l_bpFaced']}}" {% endif %}
+      ></input>
+    </div>
+  </div>
+  <div class="actions">
+    {% if match %}
+    <a href="{{url_for('delete_match', player_id=match.w_id, m_code=match.match_number|string +'-'+ match.t_id +'-'+ match.t_year|string)}}"><button type="button" class="bg-delete"><i class="fa fa-trash"></i> Apagar</button></a>
+    <a href="{{url_for('view_match', player_id=0, m_code=match.match_number|string +'-'+ match.t_id +'-'+ match.t_year|string)}}"><button type="button" class="bg-none"><i class="fa fa-times-circle"></i> Cancelar</button></a>
+    <button type="submit" class="bg-blue"><i class="fa fa-save"></i> Atualizar</button>
+    {% else %}
+    <button type="button" class="bg-none eraser"><i class="fa fa-eraser"></i> Limpar</button>
+    <button type="submit" class="bg-blue"><i class="fa fa-plus-circle"></i> Inserir</button>
+    {% endif %}
+  </div>
+</form>

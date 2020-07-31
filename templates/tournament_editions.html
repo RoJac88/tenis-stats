@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Torneios - {% endblock %}
+{% block main %}
+{% if overline %}
+<div class="top-overline">{{overline}}</div>
+{% endif %}
+{% include '_tournament_tabs.html'%}
+<br>
+<table class='player-list'>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>NOME</td>
+      <td>ANO</td>
+      <td>DATA</td>
+      <td>PISO</td>
+      <td>VENCEDOR</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in tournaments %}
+    <tr>
+      <td><a href="{{url_for('view_tournament', t_code=t.tournament_year|string +'-'+ t.tournament_id)}}">{{t.tournament_id}}</a></td>
+      <td><a href="{{url_for('view_tournament', t_code=t.tournament_year|string +'-'+ t.tournament_id)}}">{{t.t_name}}</a></td>
+      <td><a href="{{url_for('view_tournament', t_code=t.tournament_year|string +'-'+ t.tournament_id)}}">{{t.tournament_year}}</a></td>
+      <td><a href="{{url_for('view_tournament', t_code=t.tournament_year|string +'-'+ t.tournament_id)}}">{{t.t_date}}</a></td>
+      {% if t.surface == 'H' %}
+      <td><span class="icon h"></span> Duro</td>
+      {% elif t.surface == 'C' %}
+      <td><span class="icon c"></span>Saibro</td>
+      {% elif t.surface == 'G'%}
+      <td><span class="icon g"></span>Grama</td>
+      {% elif t.surface == 'P'%}
+      <td><span class="icon p"></span>Carpete</td>
+      {% else %}
+      <td> ? </td>
+      {% endif %}
+      <td>
+        {% if t.w_id %}
+        <a href="{{url_for('view_player', player_id=t.w_id)}}"><img class="flag" src="{{url_for('static', filename='/flags/' + t.w_fed|lower + '.gif')}}" alt="{{t.w_fed}}" title="{{t.w_fed}}">{{t.w_fname}} {{t.w_lname}}</a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

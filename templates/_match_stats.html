@@ -1,0 +1,62 @@
+<article class="match-stats">
+  <header>
+    <div class="player-name">{{match.winner_fname}} {{match.winner_lname}}</div>
+    <div class="match-score">{{match.score}}</div>
+    <div class="player-name">{{match.loser_fname}} {{match.loser_lname}}</div>
+  </header>
+  {% if match.mins %}
+  <div class="match-time">duração: {{match.mins}}<span>min</span></div>
+  {% endif %}
+  {% if match.w_ace or match.l_ace %}
+  <div class="score-row">
+    <div class="match-stat">{{match.w_ace or 0}}</div>
+    <div class="stat-name">aces</div>
+    <div class="match-stat">{{match.l_ace or 0}}</div>
+  </div>
+  {% endif %}
+  {% if match.w_df or match.l_df %}
+  <div class="score-row">
+    <div class="match-stat">{{match.w_df or 0}}</div>
+    <div class="stat-name">duplas faltas</div>
+    <div class="match-stat">{{match.l_df or 0}}</div>
+  </div>
+  {% endif %}
+  {% if (match.w_svpt and match.w_1stIn) or (match.l_svpt and match.l_1stIn) %}
+  <div class="score-row">
+    {% if match.w_svpt and match.w_1stIn %}
+    <div class="match-stat">{{ '%0.1f'|format((match.w_1stIn/match.w_svpt)*100|float) }}</div>
+    {% endif %}
+    <div class="stat-name">% 1º serviço</div>
+    {% if match.l_svpt and match.l_1stIn %}
+    <div class="match-stat">{{ '%0.1f'|format((match.l_1stIn/match.l_svpt)*100|float) }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if (match.w_svpt and match.w_1stWon) or (match.l_svpt and match.l_1stWon) %}
+  <div class="score-row">
+    {% if match.w_svpt and match.w_1stWon %}
+    <div class="match-stat">{{ '%0.1f'|format((match.w_1stWon/match.w_svpt)*100|float) }}</div>
+    {% endif %}
+    <div class="stat-name">% pontos 1º serviço</div>
+    {% if match.l_svpt and match.l_1stWon %}
+    <div class="match-stat">{{ '%0.1f'|format((match.l_1stWon/match.l_svpt)*100|float) }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+  {% if match.w_svpt and match.w_1stIn and match.w_1stWon and match.w_2ndWon and match.l_svpt and match.l_1stIn and match.l_1stWon and match.l_2ndWon %}
+  {% set w2ndIn = match.w_svpt - match.w_1stIn %}
+  {% set l2ndIn = match.l_svpt - match.l_1stIn %}
+  <div class="score-row">
+    <div class="match-stat">{{ '%0.1f'|format((match.w_2ndWon/w2ndIn)*100|float) }}</div>
+    <div class="stat-name">% pontos 2º serviço</div>
+    <div class="match-stat">{{ '%0.1f'|format((match.l_2ndWon/l2ndIn)*100|float) }}</div>
+  </div>
+  {% endif %}
+  {% if match.w_bpFaced and match.w_bpSaved and match.l_bpFaced and match.l_bpSaved %}
+  <div class="score-row">
+    <div class="match-stat">{{match.w_bpSaved}}/{{match.w_bpFaced}}</div>
+    <div class="stat-name">breaks salvos</div>
+    <div class="match-stat">{{match.l_bpSaved}}/{{match.l_bpFaced}}</div>
+  </div>
+  {% endif %}
+</article>

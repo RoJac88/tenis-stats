@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Index - {% endblock %}
+{% block main %}
+<div class="top-overline">Bem vindo</div>
+<div class="home-description">
+  <p>A Associação de Tenistas Profissionais (em inglês: Association of Tennis Professionals - ATP) foi criada em 1972 para defender os interesses dos jogadores masculinos de tênis. Em 1990, a Associação começou a organizar os principais torneios mundiais da modalidade, atualmente conhecidos como Torneios da ATP.</p>
+  <p>Neste site apresentamos informações sobre os torneios da organização, desde os ATP 250 até os Grand Slams. Os dados vão desde 1968 até 2020 e foram compilados por <a href="https://github.com/JeffSackmann/tennis_atp" style="font-weight: bold; color: white;">Jeff Sackmann</a>.</p>
+</div>
+<div class="overline">números da base de dados</div>
+<br>
+<div class="home-numbers">
+  <div class="big-n">
+    <div class="big-n-content">{{stats[0]}}</div>
+    <div class="big-n-label">Tenistas</div>
+  </div>
+  <div class="big-n">
+    <div class="big-n-content">{{stats[1]}}</div>
+    <div class="big-n-label">Torneios</div>
+  </div>
+  <div class="big-n">
+    <div class="big-n-content">{{stats[2]}}</div>
+    <div class="big-n-label">Partidas</div>
+  </div>
+</div>
+{% endblock %}

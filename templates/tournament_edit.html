@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Editar Torneio - {% endblock %}
+{% block main %}
+<div class="top-overline">Editar Torneio</div>
+{% include '_form_tournament.html' %}
+<div class="overline">{{matches|length}} partidas</div>
+<div class="t-match-actions">
+  <a href="{{url_for('new_match', t_id=t['tournament_id'], t_year=t['tournament_year'], t_name=t['t_name'])}}"><button type="button"class="bg-new"><i class="fa fa-plus"></i>Nova Partida</button></a>
+  <a href="{{url_for('clear_tournament', t_code=t['tournament_year']|string+'-'+t['tournament_id']|string)}}"><button type="button" class="bg-delete"><i class="fa fa-trash"></i>{{matches|length}} partidas</button></a>
+</div>
+{% if matches and matches|length > 0 %}
+{% include '_matches_table.html' %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}{{player.first_name}} {{player.last_name}} - {% endblock %}
+{% block main %}
+<div class="top-overline">perfil</div>
+<article class="player-profile">
+  {% if player.img %}
+  <img class="picture" src="{{player.img}}" width=220 height=200/>
+  {% else %}
+  <img class="picture" src="{{url_for('static', filename='/players/default.png')}}" width=220 height=200/>
+  {% endif %}
+  <div class="field">
+    <div class="field-overline">id</div>
+    <div class="field-content atp-id">{{player.id}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">nome</div>
+    <div class="field-content name">{{player.first_name}} {{player.last_name}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">federação</div>
+    <div class="field-content"><img class="flag" src="{{url_for('static', filename='/flags/' + player.country|lower + '.gif')}}" alt="{{player.country}}">{{player.country}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">nascimento</div>
+    <div class="field-content">{{player.birthdate}}</div>
+  </div>
+  <div class="field">
+    <div class="field-overline">empunhadura</div>
+    {% if player.hand == 'R' %}
+    <div class="field-content smaller">Destro</div>
+    {% elif player.hand == 'L'%}
+    <div class="field-content smaller">Canhoto</div>
+    {% elif player.hand == 'A'%}
+    <div class="field-content smaller">Ambidestro</div>
+    {% else %}
+    <div class="field-content">?</div>
+    {% endif %}
+  </div>
+  <div class="field">
+    <div class="field-overline">altura</div>
+    {% if player.height and player.height != 'NULL' %}
+    <div class="field-content">{{player.height}} cm</div>
+    {% endif %}
+  </div>
+</article>
+<div class="player-numbers">
+  {% include '_admin_actions.html' %}
+  <div class="big-n">
+    <div class="big-n-content">{{stats['slams']}}</div>
+    <div class="big-n-label">Grand Slams</div>
+  </div>
+  <div class="big-n">
+    <div class="big-n-content">{{stats['titles']}}</div>
+    <div class="big-n-label">Títulos</div>
+  </div>
+  <div class="big-n">
+    <div class="big-n-content">{{stats['matches']}}</div>
+    <div class="big-n-label">Partidas</div>
+  </div>
+</div>
+<div class="overline">últimas partidas</div>
+{% include '_player_matches_table.html'%}
+<div class="center-content">
+  <a href="{{url_for('view_player_matches', player_id=player.id)}}"><button class="all">Ver Todas</button></a>
+</div>
+{% endblock %}

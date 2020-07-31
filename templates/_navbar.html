@@ -1,0 +1,15 @@
+<div class="top-bar">
+  <div class="login"><a href="{{url_for('login')}}">Entrar</a></div>
+</div>
+<div class="nav-container">
+  <div class="title">Tênis Stats</div>
+  <div class="subtitle">Estatísticas de partidas do circuito profissional da ATP</div>
+  <nav>
+    <a href="{{url_for('home')}}">{% if active == 'home' %}<div class="nav-item active">Home</div>{% else %}<div class="nav-item">Home</div>{% endif %}</a>
+    <a href="{{url_for('player_menu')}}">{% if active == 'players' %}<div class="nav-item active">Tenistas</div>{% else %}<div class="nav-item">Tenistas</div>{% endif %}</a>
+    <a href="{{url_for('view_tournaments')}}">{% if active == 'tournaments' %}<div class="nav-item active">Torneios</div>{% else %}<div class="nav-item">Torneios</div>{% endif %}</a>
+    <a href="{{url_for('view_matches')}}">{% if active == 'matches' %}<div class="nav-item active">Partidas</div>{% else %}<div class="nav-item">Partidas</div>{% endif %}</a>
+    <a href="{{url_for('ranking_menu')}}">{% if active == 'rankings' %}<div class="nav-item active">Rankings</div>{% else %}<div class="nav-item">Rankings</div>{% endif %}</a>
+    <a href="{{url_for('about')}}">{% if active == 'about' %}<div class="nav-item active">Sobre</div>{% else %}<div class="nav-item">Sobre</div>{% endif %}</a>
+  </nav>
+</div>
