@@ -1,5 +1,7 @@
 # Tênis Stats
 
+** Este projeto foi apresentado em 2020 como parte da disciplina Tec Web da Faculdade Impacta de Tecnologia. **
+
 Os scripts de insert são gerados a partir das planilhas na pasta csv. Para criar o banco de dados e popular os dados utilize o comando: `flask init`
 
 Para facilitar a demonstração do app foram incluídas apenas as partidas de 2019 e 2020 e apenas os jogadores com pelo menos uma partida disputada neste período.
