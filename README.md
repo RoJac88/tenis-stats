@@ -1,6 +1,6 @@
 # Tênis Stats
 
-** Este projeto foi apresentado em 2020 como parte da disciplina Tec Web da Faculdade Impacta de Tecnologia. **
+**Este projeto foi apresentado em 2020 como parte da disciplina Tec Web da Faculdade Impacta de Tecnologia.**
 
 Os scripts de insert são gerados a partir das planilhas na pasta csv. Para criar o banco de dados e popular os dados utilize o comando: `flask init`
 
